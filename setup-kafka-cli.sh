@@ -31,11 +31,13 @@ echo "✅ Java configurado: $(java -version 2>&1 | head -n 1)"
 # ---------------------------
 if [ ! -d "$BASE_DIR/bin" ]; then
   echo "⬇️ Baixando e instalando Kafka..."
-  curl -L -o $HOME/kafka.tgz \
+  curl -L -o "$HOME/kafka.tgz" \
     https://downloads.apache.org/kafka/3.8.0/kafka_2.13-3.8.0.tgz
 
-  tar -xzf $HOME/kafka.tgz -C $HOME
-  mv $HOME/kafka_2.13-3.8.0 $BASE_DIR
+  mkdir -p "$BASE_DIR"
+  tar -xzf "$HOME/kafka.tgz" -C "$HOME"
+  rm -rf "$BASE_DIR"
+  mv "$HOME/kafka_2.13-3.8.0" "$BASE_DIR"
 else
   echo "☑️ Kafka já instalado em $BASE_DIR"
 fi
